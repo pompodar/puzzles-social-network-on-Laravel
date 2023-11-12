@@ -6,6 +6,14 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+     public function index()
+    {
+        // Retrieve users with the number of correct comments they made
+        $users = User::withCount('correctComments')->orderByDesc('correct_comments_count')->get();
+
+        return view('users.index', compact('users'));
+    }
+    
     public function showPuzzles($userId)
     {
         $user = User::findOrFail($userId);

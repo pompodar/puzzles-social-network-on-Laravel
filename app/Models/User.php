@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function correctComments()
+    {
+        return $this->hasMany(Comment::class)->where('is_correct', 1);
+    }
+
     public function isAdmin()
     {
         // Implement your logic to check if the user is an admin
