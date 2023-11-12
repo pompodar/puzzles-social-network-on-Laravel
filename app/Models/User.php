@@ -36,4 +36,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function isAdmin()
+    {
+        // Implement your logic to check if the user is an admin
+        return $this->admin == 1; 
+    }
 }

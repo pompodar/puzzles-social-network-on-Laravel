@@ -17,6 +17,26 @@
                     <span class="tag">{{ $tag->name }}</span>
                 @endforeach
             </div>
+
+            {{-- Display number of comments --}}
+            <p>{{ $puzzle->comments->count() }} {{ $puzzle->comments->count() === 1 ? 'answer' : 'answers' }}</p>
+
+            {{-- Display comments --}}
+            <h3>Comments:</h3>
+            @foreach ($puzzle->comments as $comment)
+                <div>
+                    <p>{{ $comment->content }}</p>
+                    <p>by {{ $comment->user->name }}</p>
+                </div>
+            @endforeach
+
+            @auth
+                <form method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
+                    @csrf
+                    <textarea name="content" placeholder="Add a comment"></textarea>
+                    <button type="submit">Add Comment</button>
+                </form>
+            @endauth
             
             @auth
                 <div class='puzzle-like cursor-pointer p-1 inline-block {{ $puzzle->likes()->where('user_id', auth()->id())->exists() ? 'liked' : '' }}' 
@@ -26,7 +46,7 @@
                 </div>            
             @endauth
 
-            <p>{{ $puzzle->likes_count }} {{ $puzzle->likes_count === 0 || $puzzle->likes_count === 1 ? 'user ' : 'users '}} liked this puzzle</p>
+            <p>{{ $puzzle->likes_count }} {{ $puzzle->likes_count === 1 ? 'user ' : 'users '}} liked this puzzle</p>
         
         </div>
     @endforeach

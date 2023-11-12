@@ -28,8 +28,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/puzzles', [AdminController::class, 'index'])->name('admin.puzzles.index');
     Route::post('/admin/puzzles/approve/{id}', [AdminController::class, 'approve'])->name('admin.puzzles.approve');
     Route::delete('/admin/puzzles/delete/{id}', [AdminController::class, 'delete'])->name('admin.puzzles.delete');
+    
+    Route::get('/admin/comments', [AdminController::class, 'reviewComments'])->name('admin.comments.review');
+    Route::post('/admin/comments/{commentId}/mark-as-correct', [AdminController::class, 'markCommentAsCorrect'])
+    ->name('admin.comments.markAsCorrect');
+    Route::post('/admin/comments/{commentId}/mark-as-incorrect', [AdminController::class, 'markCommentAsInCorrect'])
+    ->name('admin.comments.markAsInCorrect');
 });
 
+Route::get('/puzzles/{puzzleId}', [HomeController::class, 'show'])->name('puzzle.show');
+Route::post('/puzzles/{puzzleId}/add-comment', [HomeController::class, 'addComment'])->name('puzzle.addComment');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
