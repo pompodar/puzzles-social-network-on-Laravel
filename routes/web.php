@@ -7,11 +7,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PuzzleController;
 
-// Route::get('/', function () {
-//     $puzzles = Puzzle::all(); 
-//     return view('pages.home', ['puzzles' => $puzzles]);
-// })->name('home');
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/puzzle/{id}/like', [HomeController::class, 'like'])->name('puzzle.like');
@@ -26,6 +21,15 @@ Route::get('/user/{userId}', [UserController::class, 'showPuzzles'])->name('user
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+use App\Http\Controllers\AdminController;
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/puzzles', [AdminController::class, 'index'])->name('admin.puzzles.index');
+    Route::post('/admin/puzzles/approve/{id}', [AdminController::class, 'approve'])->name('admin.puzzles.approve');
+    Route::delete('/admin/puzzles/delete/{id}', [AdminController::class, 'delete'])->name('admin.puzzles.delete');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -26,7 +26,8 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <!-- Add other fields as needed -->
+        <label for="tags">Tags (comma-separated):</label>
+        <input type="text" name="tags" id="tags" value="{{ old('tags') }}" placeholder="Tag1, Tag2, Tag3">
 
         <button type="submit">Add Puzzle</button>
     </form>
