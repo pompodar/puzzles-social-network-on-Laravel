@@ -4,14 +4,22 @@
 
 @section('content')
 
+<div class="puzzles-grid p-4 flex gap-2">
+
     @foreach ($puzzles as $puzzle)
-        <div>
-            <h2>{{ $puzzle->title }}</h2>
-            <p>{{ $puzzle->description }}</p>
-            <p>by <a href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p>
+        <div class="puzzle-card w-80 bg-white p-2 rounded">
+            <h2 class="text-lg">{{ $puzzle->title }}</h2>
+            <hr />
+            <p class="text-base">
+                {{\Illuminate\Support\Str::limit($puzzle->description, 130)}}
+            </p>
+
+            <hr />
+
+            <p class="text-sm">by <a href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p>
             
             {{-- Display tags --}}
-            <div>
+            <div class="text-sm">
                 Tags:
                 @foreach ($puzzle->tags as $tag)
                     <span class="tag">{{ $tag->name }}</span>
@@ -19,40 +27,42 @@
             </div>
 
             {{-- Display number of comments --}}
-            <p>{{ $puzzle->comments->count() }} {{ $puzzle->comments->count() === 1 ? 'answer' : 'answers' }}</p>
+            <p class="text-sm">{{ $puzzle->comments->count() }} {{ $puzzle->comments->count() === 1 ? 'answer' : 'answers' }}</p>
 
             {{-- Display comments --}}
-            <h3>Comments:</h3>
+            <h3 class="text-sm">Comments:</h3>
             @foreach ($puzzle->comments as $comment)
                 <div>
-                    <p>{{ $comment->content }}</p>
-                    <p>by {{ $comment->user->name }}</p>
+                    <p class="text-sm">{{ $comment->content }}</p>
+                    <p class="text-sm">by {{ $comment->user->name }}</p>
                 </div>
             @endforeach
 
-            @auth
+            <!-- @auth
                 <form method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
                     @csrf
                     <textarea name="content" placeholder="Add a comment"></textarea>
                     <button type="submit">Add Comment</button>
                 </form>
-            @endauth
+            @endauth -->
             
             @auth
-                <div class='puzzle-like cursor-pointer p-1 inline-block {{ $puzzle->likes()->where('user_id', auth()->id())->exists() ? 'liked' : '' }}' 
+                <div class='text-smpuzzle-like cursor-pointer p-1 inline-block {{ $puzzle->likes()->where('user_id', auth()->id())->exists() ? 'liked' : '' }}' 
                     id='puzzle-{{ $puzzle->id }}-like'
                 >
                     &#9829;
                 </div>            
             @endauth
 
-            <p>{{ $puzzle->likes_count }} {{ $puzzle->likes_count === 1 ? 'user ' : 'users '}} liked this puzzle</p>
+            <p class="text-sm">{{ $puzzle->likes_count }} {{ $puzzle->likes_count === 1 ? 'user ' : 'users '}} liked this puzzle</p>
         
         </div>
     @endforeach
 
     <!-- Pagination Links -->
     {{ $puzzles->links() }}
+
+</div>
 
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         @if (Route::has('login'))

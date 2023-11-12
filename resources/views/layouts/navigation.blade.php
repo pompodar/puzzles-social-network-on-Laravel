@@ -1,15 +1,37 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    
         <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+
+        <!-- Logo -->
+                <div class="logo-granny shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                        <div class="granny-head">
+                            <div class="right-bottom-bang"></div>
+                        
+                            <div class="right-top-bang"></div>
+                        
+                            <div class="left-bottom-bang"></div>
+                        
+                            <div class="left-top-bang"></div>
+                            
+                            <div class="granny-face">
+                            <div class="left-eye"></div>
+                            <div class="right-eye"></div>
+                            <div class="glasses">
+                                <div class="left-lens"></div>
+                                <div class="right-lens"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>                    
+                </a>
                 </div>
 
+            <div class="flex">
+                
                 @auth
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -19,11 +41,22 @@
                 </div>
 
                 @endauth
+
+            </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    Users Ranking
+                </x-nav-link>
             </div>
 
             @auth
 
-            <a href="{{ route('puzzle.create') }}">Add a Puzzle</a>
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex  mx-auto">
+                <x-nav-link :href="route('puzzle.create')" :active="request()->routeIs('puzzle.create')">
+                    Add a Puzzle
+                </x-nav-link>
+            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
