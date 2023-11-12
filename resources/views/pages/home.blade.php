@@ -3,7 +3,6 @@
 @section('title', 'Головоломки')
 
 @section('content')
-    <h1>Головоломки</h1>
 
     @foreach ($puzzles as $puzzle)
         <div>
@@ -11,10 +10,17 @@
             <p>{{ $puzzle->description }}</p>
             <p>by <a href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p>
             
-            @auth
+            {{-- Display tags --}}
+            <div>
+                Tags:
+                @foreach ($puzzle->tags as $tag)
+                    <span class="tag">{{ $tag->name }}</span>
+                @endforeach
+            </div>
             
+            @auth
                 <div class='puzzle-like cursor-pointer p-1 inline-block {{ $puzzle->likes()->where('user_id', auth()->id())->exists() ? 'liked' : '' }}' 
-                id='puzzle-{{ $puzzle->id }}-like'
+                    id='puzzle-{{ $puzzle->id }}-like'
                 >
                     &#9829;
                 </div>            
@@ -24,6 +30,9 @@
         
         </div>
     @endforeach
+
+    <!-- Pagination Links -->
+    {{ $puzzles->links() }}
 
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         @if (Route::has('login'))

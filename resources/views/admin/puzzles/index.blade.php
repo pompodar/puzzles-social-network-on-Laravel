@@ -19,7 +19,20 @@
                         <div>
                             <h2>{{ $puzzle->title }}</h2>
                             <p>{{ $puzzle->description }}</p>
-                            <!-- Display other puzzle details as needed -->
+                            
+                            {{-- Display tags --}}
+                            <div>
+                                Tags:
+                                @foreach ($puzzle->tags as $tag)
+                                    <span class="tag">{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+
+                            <div class='puzzle-like cursor-pointer p-1 inline-block {{ $puzzle->likes()->where('user_id', auth()->id())->exists() ? 'liked' : '' }}' 
+                                id='puzzle-{{ $puzzle->id }}-like'
+                            >
+                                &#9829;
+                            </div>
 
                             <form method="post" action="{{ route('admin.puzzles.approve', ['id' => $puzzle->id]) }}" class="inline">
                                 @csrf
@@ -33,6 +46,10 @@
                             </form>
                         </div>
                     @endforeach
+
+                    <!-- Pagination Links -->
+                    {{ $puzzlesToApprove->links() }}   
+
                 </div>
             </div>
         </div>

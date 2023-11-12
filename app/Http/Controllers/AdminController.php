@@ -13,8 +13,8 @@ class AdminController extends Controller
     }
 
     public function index()
-    {
-        $puzzlesToApprove = Puzzle::where('approved', false)->get();
+    {        
+        $puzzlesToApprove = Puzzle::where('approved', false)->paginate(1);
 
         return view('admin.puzzles.index', ['puzzlesToApprove' => $puzzlesToApprove]);
     }

@@ -11,8 +11,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $puzzles = Puzzle::where('approved', true)->get();
-        
+        $puzzles = Puzzle::where('approved', true)->paginate(2); 
+
         return view('pages.home', ['puzzles' => $puzzles]);
     }
 
