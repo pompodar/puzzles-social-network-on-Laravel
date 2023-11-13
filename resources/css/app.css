@@ -4,10 +4,19 @@
 
 /* logo */
 
+a:hover {
+    border-color: aquamarine !important;
+}
+
 .logo-granny {
     transform: scale(0.2);
     margin-right: auto;
     margin-left: -90px;
+    transition: all 0.5s;
+}
+
+.logo-granny:hover {
+    transform: scale(0.21);
 }
 
 .granny-head {
@@ -198,10 +207,72 @@
     }
 }
 
-/* liked */
+/* puzzles-grid */
 
-.liked {
-    background-color: burlywood;
+.puzzles-grid {
+    flex-wrap: wrap;
+    max-width: 1024px;
+    margin: 0 auto;
 }
 
+/* Puzzle Card */
 
+.puzzle-card {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    transition: all 0.5s;
+    border: aquamarine 1px solid;
+    min-width: 280px;
+}
+
+@media (max-width: 680px) {
+    .puzzle-card {
+        min-width: 100%;
+    }
+}
+
+.puzzle-card:hover {
+    transform: scale(1.02);
+}
+
+hr {
+    background: aquamarine;
+    height: 1px;
+}
+
+.puzzle-card__author {
+    margin-top: auto;
+    transition: all 0.5s;
+}
+
+.puzzle-card__author:hover {
+    transform: scale(1.02);
+}
+
+.puzzle-card__footer {
+    color: white;
+}
+
+.puzzle-card__footer {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.puzzle-like {
+    transition: all 0.5s;
+}
+
+.puzzle-like:hover {
+    transform: scale(1.3);
+}
+
+/* pagination */
+
+.pagination .hidden {
+    display: flex;
+    flex-direction: column;
+}
