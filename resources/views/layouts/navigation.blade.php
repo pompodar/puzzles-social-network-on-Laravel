@@ -44,12 +44,35 @@
 
             </div>
 
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <div class="hidden {{ auth()->check() ? '' : 'mr-auto' }} space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                     leaderboard
                 </x-nav-link>
             </div>
 
+            @if (Route::has('login'))
+                    @auth
+
+                    @else
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            login
+                        </x-nav-link>
+                    </div>
+
+                        @if (Route::has('register'))
+
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                                register
+                            </x-nav-link>
+                        </div>
+
+                        @endif
+                    @endif
+                @endif
+                
             @auth
 
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex  mx-auto">
@@ -57,6 +80,7 @@
                     add a puzzle
                 </x-nav-link>
             </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -85,7 +109,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -106,26 +130,69 @@
         </div>
     </div>
 
-    @auth
-
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
+                
+            @auth
+                <!-- Navigation Links -->
+                <div>
+                    <x-responsive-nav-link class="font-medium text-base text-gray-800" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('dashboard') }}
+                    </x-nav-link>
+                </div>
+
+            @endauth
+
+            <div>
+                <x-responsive-nav-link  :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    leaderboard
+                </x-nav-link>
+            </div>
+
+            @auth
+
+            @else
+            
+                    <div>
+                        <x-responsive-nav-link class="font-medium text-base text-gray-800"  :href="route('login')" :active="request()->routeIs('login')">
+                            login
+                        </x-nav-link>
+                    </div>
+
+                        <div>
+                            <x-responsive-nav-link class="font-medium text-base text-gray-800"  :href="route('register')" :active="request()->routeIs('register')">
+                                register
+                            </x-nav-link>
+                        </div>
+                @endauth
+                
+
+            @auth
+
+            <div>
+                <x-responsive-nav-link class="font-medium text-base text-gray-800" :href="route('puzzle.create')" :active="request()->routeIs('puzzle.create')">
+                    add a puzzle
+                </x-responsive-nav-link>
+            </div>
+
+            @endauth
+
+        @auth
+
+        <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
+        
+        @endauth    
 
-            <div class="mt-3 space-y-1">
+        @auth
+
+        <div>
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -135,12 +202,13 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('log out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
+
+        @endauth
+            
         </div>
     </div>
-
-    @endauth
 </nav>

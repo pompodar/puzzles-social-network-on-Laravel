@@ -6,36 +6,39 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-const likeButtons = document.querySelectorAll(".puzzle-like");
+// const likeButtons = document.querySelectorAll(".puzzle-like");
 
-for (let index = 0; index < likeButtons.length; index++) {
-    const likeButton = likeButtons[index];
+// for (let index = 0; index < likeButtons.length; index++) {
+//     const likeButton = likeButtons[index];
 
-    likeButton.addEventListener("click", (event) => {
-        const targetButton = document.querySelector("#" + event.target.id);
+//     likeButton.addEventListener("click", (event) => {
+//           event.stopPropagation();
 
-        targetButton.classList.toggle("liked");
+//         console.log(this);
+//         const targetButton = document.querySelector("#" + event.target.id);
 
-        const puzzleId = event.target.id.replace("puzzle-", "").replace("-like", "");
+//         targetButton.classList.toggle("liked");
 
-        if (targetButton.classList.contains('liked')) {
-            fetch(`/puzzle/${puzzleId}/like`, {
-                method: 'GET',
-            })
-            .then((data) => {
-                if (data) {
-                    console.log(data);
-                }
-            })
-        } else {
-            fetch(`/puzzle/${puzzleId}/dislike`, {
-                method: 'GET',
-            })
-            .then((data) => {
-                if (data) {
-                    console.log(data);
-                }
-            })
-        }       
-    });
-}
+//         const puzzleId = event.target.id.replace("puzzle-", "").replace("-like", "");
+
+//         if (targetButton.classList.contains('liked')) {
+//             fetch(`/puzzle/${puzzleId}/like`, {
+//                 method: 'GET',
+//             })
+//             .then((data) => {
+//                 if (data) {
+//                     console.log(data);
+//                 }
+//             })
+//         } else {
+//             fetch(`/puzzle/${puzzleId}/dislike`, {
+//                 method: 'GET',
+//             })
+//             .then((data) => {
+//                 if (data) {
+//                     console.log(data);
+//                 }
+//             })
+//         }       
+//     });
+// }

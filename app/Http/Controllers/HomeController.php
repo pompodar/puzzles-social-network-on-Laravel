@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         // Paginate puzzles
-        $puzzles = Puzzle::where('approved', true)->paginate(2);
+        $puzzles = Puzzle::where('approved', true)->paginate(6);
 
         // Retrieve comments for each puzzle
         foreach ($puzzles as $puzzle) {

@@ -211,8 +211,15 @@ a:hover {
 
 .puzzles-grid {
     flex-wrap: wrap;
+    justify-content: center;
     max-width: 1024px;
     margin: 0 auto;
+}
+
+@media (max-width: 688px) {
+    .puzzles-grid {
+        gap: 16px;
+    }
 }
 
 /* Puzzle Card */
@@ -229,7 +236,7 @@ a:hover {
     min-width: 280px;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 688px) {
     .puzzle-card {
         min-width: 100%;
     }
