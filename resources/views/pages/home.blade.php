@@ -7,7 +7,7 @@
     <div class="puzzles-grid p-4 flex gap-2">
 
         @foreach ($puzzles as $puzzle)
-            <div class="puzzle-card w-80 bg-white rounded">
+            <div onclick="window.location='{{ route('puzzle.show', ['puzzleId' => $puzzle->id]) }}'" class="puzzle-card w-80 bg-white rounded">
                 <h2 class="text-lg p-4">{{ $puzzle->title }}</h2>
                 <hr />
                 <p class="text-base p-4">
