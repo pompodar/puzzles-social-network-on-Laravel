@@ -367,6 +367,7 @@ i.active {
 .leaderboard-table tbody {
     background-color: white;
     display: flex;
+    flex-direction: column;
     border-radius: 8px;
 }
 
@@ -390,4 +391,39 @@ i.active {
 
 .leaderboard-table td, .leaderboard-table th {
     border: 6px solid transparent;
+}
+
+/* create puzzle */
+
+.create-puzzle-form {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    width: 480px;
+    margin: 16px auto;
+    min-width: 280px;
+}
+
+.create-puzzle-form > * {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    border: none;
+    outline: none;
+}
+
+.create-puzzle-form .submit {
+    margin-right: auto;
+    color: white;
+    margin-top: 12px;
+    margin-left: 4px;
+    background-color: aqua;
+    border-radius: 8px;
+    padding: 4px 24px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: all 0.5s;
+}
+
+.create-puzzle-form .submit:hover {
+    transform: scale(1.04);
 }

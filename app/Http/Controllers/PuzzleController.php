@@ -52,7 +52,7 @@ class PuzzleController extends Controller
 
         $puzzle->tags()->sync($tagIds);
 
-        return redirect()->route('home')->with('success', 'Puzzle created successfully!');
+        return redirect()->route('puzzle.create')->with('success', 'Puzzle created successfully!');
     }
 }
 
