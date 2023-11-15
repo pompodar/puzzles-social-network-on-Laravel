@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* breeze */
+
+.logo-granny-breeze {
+    transform: scale(0.3);
+    height: 70px;
+}
 /* home */
 
 /* logo */
