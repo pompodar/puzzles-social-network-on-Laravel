@@ -280,16 +280,8 @@ hr {
     transition: all 0.5s;
 }
 
-.puzzle-like:hover {
+.puzzle-like:hover i.auth {
     transform: scale(1.3);
-}
-
-.puzzle-like i {
-    display: none;
-}
-
-i.active {
-    display: inline;
 }
 
 /* pagination */

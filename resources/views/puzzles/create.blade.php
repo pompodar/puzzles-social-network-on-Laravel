@@ -25,6 +25,12 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
+        <label for="correct_answer"></label>
+       <input placeholder="correct answer" type="text" name="correct_answer" id="correct_answer" required>
+        @error('correct_answer')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <label for="tags"></label>
         <input type="text" name="tags" id="tags" value="{{ old('tags') }}" placeholder="math, geometry, etc">
 

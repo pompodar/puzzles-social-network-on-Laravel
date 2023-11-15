@@ -51,10 +51,15 @@
                     @endauth -->
                     
                     <div class="flex">
-                        <div onclick=like({{ $puzzle->id }}) class='text-sm puzzle-like cursor-pointer p-1 inline-block' 
-                            id='puzzle-{{ $puzzle->id }}-like'>
-                            {!! $puzzle->likes()->where('user_id', auth()->id())->exists() ? '<i class="fas fa-heart active"></i> <i class="far fa-heart"></i>' : '<i class="fas fa-heart"></i> <i class="far fa-heart active"></i>' !!}
-                        </div>  
+                        <div class='text-sm puzzle-like cursor-pointer p-1 inline-block'>
+                            {!! 
+                                auth()->check() ? 
+                                    ($puzzle->likes()->where('user_id', auth()->id())->exists() 
+                                        ? '<a href="' . route('puzzle.dislike', ['id' => $puzzle->id]) . '"><i class="fas fa-heart auth"></i></a>' 
+                                        : '<a href="' . route('puzzle.like', ['id' => $puzzle->id]) . '"><i class="far fa-heart auth"></i></a>'
+                                    )
+                                    : '<i class="fas fa-heart"></i>'
+                            !!}                        </div>  
                         
                         <p class="text-sm">{{ $puzzle->likes_count }} 
                         </p>

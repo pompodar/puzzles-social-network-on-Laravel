@@ -51,7 +51,7 @@ class HomeController extends Controller
             $like->puzzle_id = $puzzle->id;
             $like->save();
 
-            return 'success';
+            return back()->with('success');
         }
     }
 
@@ -65,7 +65,7 @@ class HomeController extends Controller
         if ($like) {
             $like->delete();
 
-            return 'success';
+            return back()->with('success');
         }
     }
 }

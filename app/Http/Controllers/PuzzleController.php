@@ -28,7 +28,8 @@ class PuzzleController extends Controller
         // Validation rules, adjust as needed
         $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'required|max:2550',
+            'correct_answer' => 'required|max:2550',
         ]);
 
         // Create a new puzzle and associate it with the authenticated user
@@ -36,7 +37,7 @@ class PuzzleController extends Controller
         $puzzle = $user->puzzles()->create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            // Add other fields as needed
+            'correct_answer' => $request->input('correct_answer'),
         ]);
 
         // Associate tags with the puzzle

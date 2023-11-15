@@ -10,7 +10,7 @@ class Puzzle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title', 'description', 'approved']; // Add 'user_id' to the $fillable array
+    protected $fillable = ['user_id', 'title', 'description', 'correct_answer', 'approved']; 
 
     public function user()
     {

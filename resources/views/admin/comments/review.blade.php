@@ -11,6 +11,9 @@
             <h2>{{ $puzzle->title }}</h2>
             <p>{{ $puzzle->description }}</p>
 
+            <p>correct answer</p>
+            <p>{{ $puzzle->correct_answer }}</p>
+
             @foreach ($puzzle->comments->where('is_correct', false) as $comment)
                 <div>
                     <p>{{ $comment->content }}</p>
