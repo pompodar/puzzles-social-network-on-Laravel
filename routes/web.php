@@ -38,7 +38,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-Route::get('/puzzles/{puzzleId}', [HomeController::class, 'show'])->name('puzzle.show');
+Route::get('/puzzles/{puzzleId}', [PuzzleController::class, 'show'])->name('puzzle.show');
 Route::post('/puzzles/{puzzleId}/add-comment', [HomeController::class, 'addComment'])->name('puzzle.addComment');
 
 Route::middleware('auth')->group(function () {

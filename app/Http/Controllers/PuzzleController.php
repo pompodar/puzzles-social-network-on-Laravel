@@ -14,6 +14,15 @@ class PuzzleController extends Controller
         return view('puzzles.create');
     }
 
+    public function show($puzzleId)
+    {
+        $puzzle = Puzzle::findOrFail($puzzleId);
+        // Assuming you have a relationship to get comments
+        $comments = $puzzle->comments()->with('user')->get();
+
+        return view('puzzles.show', compact('puzzle', 'comments'));
+    }
+
     public function store(Request $request)
     {
         // Validation rules, adjust as needed

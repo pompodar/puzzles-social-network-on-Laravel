@@ -42,9 +42,19 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function allComments()
+    {
+        return $this->comments();
+    }
+
     public function correctComments()
     {
-        return $this->hasMany(Comment::class)->where('is_correct', 1);
+        return $this->comments()->where('is_correct', '1');
+    }
+
+    public function incorrectComments()
+    {
+        return $this->comments()->where('is_correct', '-1');
     }
 
     public function isAdmin()

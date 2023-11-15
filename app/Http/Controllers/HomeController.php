@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         // Paginate puzzles
-        $puzzles = Puzzle::where('approved', true)->paginate(6);
+        $puzzles = Puzzle::where('approved', true)->paginate(3);
 
         // Retrieve comments for each puzzle
         foreach ($puzzles as $puzzle) {
@@ -37,7 +37,7 @@ class HomeController extends Controller
         $comment->content = $request->input('content');
         $comment->save();
 
-        // return redirect()->route('puzzle.show', ['puzzleId' => $puzzleId])->with('success', 'Comment added successfully.');
+        return redirect()->route('puzzle.show', ['puzzleId' => $puzzleId])->with('success', 'Comment added successfully.');
     }
 
     public function like($puzzleId)

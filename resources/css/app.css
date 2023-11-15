@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* home */
+
 /* logo */
 
 a:hover {
     border-color: aquamarine !important;
+}
+
+.alert.alert-success {
+    color: aqua;
+    padding: 4px 12px;
 }
 
 .logo-granny {
@@ -290,4 +297,97 @@ i.active {
 .pagination .hidden {
     display: flex;
     flex-direction: column;
+}
+
+/* single puzzle */
+
+.puzzles-grid-single {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Puzzle Card */
+
+.puzzle-card-single {
+    width: 480px;
+    cursor: auto;
+}
+
+.puzzle-card-single:hover {
+    transform: scale(1);
+}
+
+/* form */
+
+.puzzle-card-single__comments {
+    width: 480px;
+    min-width: 280px;
+}
+
+.puzzle-card-single__comments textarea {
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.puzzle-card-single__comments .submit {
+    color: white;
+    margin-top: 12px;
+    margin-left: 4px;
+    background-color: aqua;
+    border-radius: 8px;
+    padding: 4px 24px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: all 0.5s;
+}
+
+.puzzle-card-single__comments .submit:hover {
+    transform: scale(1.04);
+}
+
+/* leaderboard */
+
+.leaderboard-table {
+    max-width: 1024px;
+    margin: 16px auto;
+    text-align: left;
+    border-spacing: 10px;
+    min-width: 280px;
+    border-radius: 8px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.leaderboard-table thead {
+    background-color: #EF4136;
+    color: white;
+    display: flex;
+}
+
+.leaderboard-table tbody {
+    background-color: white;
+    display: flex;
+    border-radius: 8px;
+}
+
+.leaderboard-table tr {
+    display: flex;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    font-weight: 500;
+    width: 70px
+}
+
+.leaderboard-table th:first-of-type, .leaderboard-table td:first-of-type {
+    width: 100px;
+}
+
+.leaderboard-table th:nth-child(3),
+.leaderboard-table td:nth-child(3) {
+    width: 82px;
+}
+
+.leaderboard-table td, .leaderboard-table th {
+    border: 6px solid transparent;
 }

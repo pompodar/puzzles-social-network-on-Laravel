@@ -1,17 +1,21 @@
 @extends('layouts.header')
 
-@section('title', "Granny's Puzzles")
+@section('title', $puzzle->title)
 
 @section('content')
 
-    <div class="puzzles-grid p-4 flex gap-2">
-
-        @foreach ($puzzles as $puzzle)
-            <div onclick="window.location='{{ route('puzzle.show', ['puzzleId' => $puzzle->id]) }}'" class="puzzle-card w-80 bg-white rounded">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
+    <div class="puzzles-grid puzzles-grid-single p-4 flex gap-2">
+        <div class="puzzle-card puzzle-card-single w-80 bg-white rounded">
                 <h2 class="text-lg p-4">{{ $puzzle->title }}</h2>
                 <hr />
                 <p class="text-base p-4">
-                    {{ \Illuminate\Support\Str::limit($puzzle->description, 130) }}
+                    {{ $puzzle->description }}
                 </p>
 
                 <p class="puzzle-card__author text-amber-500 text-sm px-4 py-2">by <a class="author text-amber-500" href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p>
@@ -57,13 +61,43 @@
                     </div>
                 </div>    
             </div>
-        @endforeach
 
-    </div>
+            {{-- Add a form for adding new comments --}}
+            @auth
+                <form class="puzzle-card-single__comments" method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
+                    @csrf
+                    <label for="content"></label>
+                    <textarea placeholder="your answer" name="content" id="content" required></textarea>
+                    <button class="submit" type="submit">submit</button>
+                </form>
+            @endauth
 
-    <!-- Pagination Links -->
-    <div class="pagination">
-        {{ $puzzles->links() }}
-    </div>
-
+        </div>    
+        
 @endsection
+
+
+<script>
+    function like(puzzleId) {
+        const targetButton = document.querySelectorAll("#puzzle-" + puzzleId + "-like i");
+
+        let isLike;
+
+        targetButton.forEach((element) => {
+            isLiked = !element.classList.contains("active");
+
+            element.classList.toggle("active");
+        });
+
+        console.log(isLiked);
+
+        fetch(`/puzzle/${puzzleId}/${isLiked ? 'dislike' : 'like'}`, {
+            method: 'GET',
+        })
+        .then((response) => {
+            if (response.ok) {
+                console.log(response);
+            }
+        });
+    }
+</script>
