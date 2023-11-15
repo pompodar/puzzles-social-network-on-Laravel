@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'Головоломки')
+@section('title', "Granny's Puzzles")
 
 @section('content')
 
@@ -49,7 +49,7 @@
                     <div class="flex">
                         <div onclick=like({{ $puzzle->id }}) class='text-sm puzzle-like cursor-pointer p-1 inline-block' 
                             id='puzzle-{{ $puzzle->id }}-like'>
-                            {!! $puzzle->likes()->where('user_id', auth()->id())->exists() ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>' !!}
+                            {!! $puzzle->likes()->where('user_id', auth()->id())->exists() ? '<i class="fas fa-heart active"></i> <i class="far fa-heart"></i>' : '<i class="fas fa-heart"></i> <i class="far fa-heart active"></i>' !!}
                         </div>  
                         
                         <p class="text-sm">{{ $puzzle->likes_count }} 
@@ -70,28 +70,25 @@
 
 <script>
     function like(puzzleId) {
-        const targetButton = document.querySelector("#puzzle-" + puzzleId + "-like");
-        
-        targetButton.classList.toggle("liked");
+        const targetButton = document.querySelectorAll("#puzzle-" + puzzleId + "-like i");
 
-        if (targetButton.classList.contains('liked')) {
-            fetch(`/puzzle/${puzzleId}/like`, {
-                method: 'GET',
-            })
-            .then((data) => {
-                if (data) {
-                    console.log(data);
-                }
-            })
-        } else {
-            fetch(`/puzzle/${puzzleId}/dislike`, {
-                method: 'GET',
-            })
-            .then((data) => {
-                if (data) {
-                    console.log(data);
-                }
-            })
-        }       
-}
+        let isLike;
+
+        targetButton.forEach((element) => {
+            isLiked = !element.classList.contains("active");
+
+            element.classList.toggle("active");
+        });
+
+        console.log(isLiked);
+
+        fetch(`/puzzle/${puzzleId}/${isLiked ? 'dislike' : 'like'}`, {
+            method: 'GET',
+        })
+        .then((response) => {
+            if (response.ok) {
+                console.log(response);
+            }
+        });
+    }
 </script>

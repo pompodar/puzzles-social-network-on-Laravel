@@ -277,6 +277,14 @@ hr {
     transform: scale(1.3);
 }
 
+.puzzle-like i {
+    display: none;
+}
+
+i.active {
+    display: inline;
+}
+
 /* pagination */
 
 .pagination .hidden {
