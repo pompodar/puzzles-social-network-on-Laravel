@@ -33,23 +33,6 @@
                     {{-- Display number of comments --}}
                     <p class="text-sm">{{ $puzzle->comments->count() }} {{ $puzzle->comments->count() === 1 ? 'answer' : 'answers' }}</p>
 
-                    {{-- Display comments --}}
-                    <!-- <h3 class="text-sm">Comments:</h3>
-                    @foreach ($puzzle->comments as $comment)
-                        <div>
-                            <p class="text-sm">{{ $comment->content }}</p>
-                            <p class="text-sm">by {{ $comment->user->name }}</p>
-                        </div>
-                    @endforeach -->
-
-                    <!-- @auth
-                        <form method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
-                            @csrf
-                            <textarea name="content" placeholder="Add a comment"></textarea>
-                            <button type="submit">Add Comment</button>
-                        </form>
-                    @endauth -->
-                    
                     <div class="flex">
                         <div class='text-sm puzzle-like cursor-pointer p-1 inline-block'>
                             {!! 
@@ -67,42 +50,41 @@
                 </div>    
             </div>
 
+            <div class="comments">
+                {{-- Display comments --}}
+                    @auth
+                        @if ($puzzle->comments->where('user_id', auth()->id())->count())
+                            <h3 class="text-lg py-2">Answers:</h3>
+                            <hr />
+                            @foreach ($puzzle->comments as $comment)
+                                @if ($comment->user_id == auth()->id())
+                                    <div class="py-2">
+                                        <p class="text-sm">{{ $comment->content }}</p>
+                                        <p class="text-sm">by {{ $comment->user->name }}</p>
+                                    </div>
+
+                                    <hr class="w-36"/>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endauth
+                </div>
+
+                <div class="pagination">
+                </div>
+
             {{-- Add a form for adding new comments --}}
             @auth
-                <form class="puzzle-card-single__comments" method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
-                    @csrf
-                    <label for="content"></label>
-                    <textarea placeholder="your answer" name="content" id="content" required></textarea>
-                    <button class="submit" type="submit">submit</button>
-                </form>
+                @if (!$puzzle->comments->where('user_id', auth()->id())->count())
+                    <form class="puzzle-card-single__comments" method="post" action="{{ route('puzzle.addComment', ['puzzleId' => $puzzle->id]) }}">
+                        @csrf
+                        <label for="content"></label>
+                        <textarea placeholder="your answer" name="content" id="content" required></textarea>
+                        <button class="submit" type="submit">submit</button>
+                    </form>
+                @endif
             @endauth
 
         </div>    
         
 @endsection
-
-
-<script>
-    function like(puzzleId) {
-        const targetButton = document.querySelectorAll("#puzzle-" + puzzleId + "-like i");
-
-        let isLike;
-
-        targetButton.forEach((element) => {
-            isLiked = !element.classList.contains("active");
-
-            element.classList.toggle("active");
-        });
-
-        console.log(isLiked);
-
-        fetch(`/puzzle/${puzzleId}/${isLiked ? 'dislike' : 'like'}`, {
-            method: 'GET',
-        })
-        .then((response) => {
-            if (response.ok) {
-                console.log(response);
-            }
-        });
-    }
-</script>

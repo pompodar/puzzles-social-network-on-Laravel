@@ -9,6 +9,10 @@ use App\Http\Controllers\PuzzleController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/rules', function () {
+    return view('pages.rules');
+})->name('rules');
+
 Route::get('/puzzle/{id}/like', [HomeController::class, 'like'])->name('puzzle.like');
 Route::get('/puzzle/{id}/dislike', [HomeController::class, 'dislike'])->name('puzzle.dislike');
 

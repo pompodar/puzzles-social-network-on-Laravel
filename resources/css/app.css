@@ -425,3 +425,39 @@ hr {
 .create-puzzle-form .submit:hover {
     transform: scale(1.04);
 }
+
+/* comments */
+
+.comments {
+    width: 480px;
+    min-width: 280px;
+    margin: 8px auto;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    color: white;
+    background-color: aquamarine;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.rules {
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.rules p {
+    margin-inline: 4px;
+}
+
+.rules h1 {
+    color: orangered;
+    font-weight: 700;
+}
+
+.rules h2 {
+    color: aqua;
+}
+
+/* footer */
+
+footer {
+    color: aquamarine;
+}
