@@ -269,9 +269,9 @@ hr {
     transition: all 0.5s;
 }
 
-.puzzle-card__author:hover {
+/* .puzzle-card__author:hover {
     transform: scale(1.02);
-}
+} */
 
 .puzzle-card__footer {
     color: white;

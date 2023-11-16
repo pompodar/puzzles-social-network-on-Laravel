@@ -14,7 +14,9 @@
                     {{ \Illuminate\Support\Str::limit($puzzle->description, 130) }}
                 </p>
 
-                <p class="puzzle-card__author text-amber-500 text-sm px-4 py-2">by <a class="author text-amber-500" href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p>
+                <p class="puzzle-card__author text-amber-500 text-sm px-4 py-2">by {{ $puzzle->user->name }}</p>
+
+                <!-- <p class="puzzle-card__author text-amber-500 text-sm px-4 py-2">by <a class="author text-amber-500" href="{{ route('user.puzzles', ['userId' => $puzzle->user->id]) }}">{{ $puzzle->user->name }}</a></p> -->
 
                 <div class="puzzle-card__footer flex justify-between items-center bg-amber-500 p-4">
                     
