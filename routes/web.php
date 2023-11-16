@@ -29,7 +29,8 @@ Route::get('/dashboard', function () {
 use App\Http\Controllers\AdminController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/puzzles', [AdminController::class, 'index'])->name('admin.puzzles.index');
+    Route::get('/admin/puzzles', [AdminController::class, 'reviewPuzzles'])->name('admin.puzzles.review');
+    Route::get('/admin/puzzles_to_approve', [AdminController::class, 'index'])->name('admin.puzzles.index');
     Route::post('/admin/puzzles/approve/{id}', [AdminController::class, 'approve'])->name('admin.puzzles.approve');
     Route::delete('/admin/puzzles/delete/{id}', [AdminController::class, 'delete'])->name('admin.puzzles.delete');
     

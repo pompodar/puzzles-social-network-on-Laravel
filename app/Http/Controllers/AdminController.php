@@ -34,10 +34,10 @@ class AdminController extends Controller
         $puzzle = Puzzle::findOrFail($id);
         $puzzle->delete();
 
-        return redirect()->route('admin.puzzles.index')->with('success', 'Puzzle deleted successfully.');
+        return redirect()->back()->with('success', 'Puzzle deleted successfully.');
     }
 
-     public function reviewComments()
+    public function reviewComments()
     {
         // Fetch puzzles that have unchecked comments
         $puzzlesWithUncheckedComments = Puzzle::whereHas('comments', function ($query) {
@@ -47,7 +47,7 @@ class AdminController extends Controller
         return view('admin.comments.review', ['puzzlesWithUncheckedComments' => $puzzlesWithUncheckedComments]);
     }
 
-     public function markCommentAsCorrect($commentId)
+    public function markCommentAsCorrect($commentId)
     {
         $comment = Comment::findOrFail($commentId);
         
@@ -75,5 +75,13 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('error', 'Permission denied.');
+    }
+
+    public function reviewPuzzles()
+    {
+        // Fetch puzzles that have unchecked comments
+        $puzzles = Puzzle::paginate(1);
+
+        return view('admin.puzzles.review', ['puzzles' => $puzzles]);
     }
 }
